@@ -394,4 +394,15 @@ $ curl -X GET http://localhost:8080/users/me -H 'Authorization: Bearer <JWT_TOKE
 - Report issues
 - Open pull request with improvements
 - Spread the word
-- Reach out to me directly at <mauriurraco@gmail.com>
+- Reach out to me directly at <muriuki119@gmail.com>
+
+# Create New User
+```javascript
+{
+  "username": "john_doe",
+  "email": "john.doe@example.com",
+  "password": "secretpassword",
+  "appUserRoles": ["ROLE_ADMIN", "ROLE_CLIENT"]
+}
+
+```
