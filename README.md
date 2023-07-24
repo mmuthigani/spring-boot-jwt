@@ -398,6 +398,7 @@ $ curl -X GET http://localhost:8080/users/me -H 'Authorization: Bearer <JWT_TOKE
 
 # Create New User
 ```javascript
+http://localhost:8099/users/signup
 {
   "username": "john_doe",
   "email": "john.doe@example.com",
