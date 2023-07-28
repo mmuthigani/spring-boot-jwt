@@ -10,7 +10,6 @@ import kikimodev.model.AppUserRole;
 @Data
 @NoArgsConstructor
 public class UserDataDTO {
-  
   @ApiModelProperty(position = 0)
   private String username;
   @ApiModelProperty(position = 1)

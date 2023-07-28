@@ -113,5 +113,12 @@ public class UserController {
   public String refresh(HttpServletRequest req) {
     return userService.refresh(req.getRemoteUser());
   }
+  
+//  @GetMapping("/blog")
+//  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
+//  public String refresh(HttpServletRequest req) {
+//    return userService.refresh(req.getRemoteUser());
+//  }
+//  return "Blogs";
 
 }
