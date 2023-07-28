@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>kikimodev</groupId>
-	<artifactId>jwt-auth-service</artifactId>
+	<artifactId>kikimodev-jwt-auth-service</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 

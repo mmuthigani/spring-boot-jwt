@@ -24,7 +24,8 @@ public class UserService {
   private final JwtTokenProvider jwtTokenProvider;
   private final AuthenticationManager authenticationManager;
 
-  public String signin(String username, String password) {
+  public String signin(String username, String password,HttpServletRequest req) {
+
     try {
       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
       return jwtTokenProvider.createToken(username, userRepository.findByUsername(username).getAppUserRoles());
@@ -62,5 +63,7 @@ public class UserService {
   public String refresh(String username) {
     return jwtTokenProvider.createToken(username, userRepository.findByUsername(username).getAppUserRoles());
   }
+
+
 
 }

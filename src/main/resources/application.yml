@@ -1,10 +1,13 @@
 spring:
   datasource:
-    # url: jdbc:h2:mem:test_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    url: jdbc:mysql://localhost:3306/spring
+    url: jdbc:h2:mem:test_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     username: root
-    password: javatest
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: root
+
+    # url: jdbc:mysql://localhost:3306/spring
+    # username: root
+    # password: javatest
+    # driver-class-name: com.mysql.cj.jdbc.Driver
   tomcat:
     max-wait: 20000
     max-active: 50
@@ -15,8 +18,8 @@ spring:
       ddl-auto: create-drop
     properties:
       hibernate:
-        # dialect: org.hibernate.dialect.H2Dialect
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.H2Dialect
+        # dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
         id:
           new_generator_mappings: false

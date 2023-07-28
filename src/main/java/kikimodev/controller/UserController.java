@@ -35,14 +35,21 @@ public class UserController {
   private final ModelMapper modelMapper;
 
   @PostMapping("/signin")
-  @ApiOperation(value = "${UserController.signin}")
+  @ApiOperation(value = "${UserController.signin}",response = UserResponseDTO.class)
   @ApiResponses(value = {//
       @ApiResponse(code = 400, message = "Something went wrong"), //
       @ApiResponse(code = 422, message = "Invalid username/password supplied")})
-  public String login(//
+  public UserResponseDTO login(//
       @ApiParam("Username") @RequestParam String username, //
-      @ApiParam("Password") @RequestParam String password) {
-    return userService.signin(username, password);
+      @ApiParam("Password") @RequestParam String password,HttpServletRequest req) {
+	  String token = userService.signin(username, password, req);
+	  
+	  UserResponseDTO userResponseDTO = modelMapper.map(userService.search(username), UserResponseDTO.class);
+	  userResponseDTO.setToken(token);
+	  System.out.println("---------------------------- "+username+" ----------------------------");
+	  System.out.println(userResponseDTO);
+	  System.out.println("---------------------------- "+username+" ----------------------------\n");
+	  return userResponseDTO;
   }
 
   @PostMapping("/signup")
@@ -81,14 +88,24 @@ public class UserController {
   }
 
   @GetMapping(value = "/me")
-  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
+//  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
   @ApiOperation(value = "${UserController.me}", response = UserResponseDTO.class, authorizations = { @Authorization(value="apiKey") })
   @ApiResponses(value = {//
       @ApiResponse(code = 400, message = "Something went wrong"), //
       @ApiResponse(code = 403, message = "Access denied"), //
-      @ApiResponse(code = 500, message = "Expired or invalid JWT token")})
+      @ApiResponse(code = 500, message = "Expired or invalid JWT token")
+      })
   public UserResponseDTO whoami(HttpServletRequest req) {
-    return modelMapper.map(userService.whoami(req), UserResponseDTO.class);
+	  String tokenWithPrefix = req.getHeader("Authorization");
+	  String token = null;
+	  
+	   if (tokenWithPrefix != null && tokenWithPrefix.startsWith("Bearer ")) {
+	        token = tokenWithPrefix.substring(7);
+	  }
+	  UserResponseDTO userResponseDTO = modelMapper.map(userService.whoami(req), UserResponseDTO.class);
+	  userResponseDTO.setToken(token);
+
+	  return userResponseDTO;
   }
 
   @GetMapping("/refresh")
