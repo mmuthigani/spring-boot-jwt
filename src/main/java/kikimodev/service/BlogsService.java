@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kikimodev.exception.CustomException;
-import kikimodev.model.AppUser;
+import kikimodev.model.Blogs;
 import kikimodev.repository.BlogsRepository;
 import kikimodev.security.JwtTokenProvider;
 
@@ -34,15 +34,17 @@ public class BlogsService {
 //    }
 //  }
 
-//  public String signup(AppUser appUser) {
-//    if (!userRepository.existsByUsername(appUser.getUsername())) {
-//      appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
-//      userRepository.save(appUser);
+  public String create(Blogs blogs) {
+    if (!blogsRepository.existsByslug(blogs.getSlug())) {
+    	blogs.setContent(blogs.getContent());
+    	blogs.setTitle(blogs.getTitle());
+    	blogsRepository.save(blogs);
+    	return "Blog Created Successfuly";
 //      return jwtTokenProvider.createToken(appUser.getUsername(), appUser.getAppUserRoles());
-//    } else {
-//      throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
-//    }
-//  }
+    } else {
+      throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+  }
 
   public void delete(String slug) {
 	  blogsRepository.deleteByslug(slug);

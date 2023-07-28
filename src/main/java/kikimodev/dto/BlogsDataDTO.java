@@ -26,5 +26,8 @@ public class BlogsDataDTO {
 	  private String created_by;
 	  @ApiModelProperty(position = 7)
 	  private String created_at;
+	  @ApiModelProperty(position = 8)
+	  private String updated_at;
+	  
 	  
 }
