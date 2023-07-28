@@ -1,13 +1,23 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:test_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    username: root
-    password: root
 
-    # url: jdbc:mysql://localhost:3306/spring
+    # ------------------Connect to H2 db------------------------# 
+    # url: jdbc:h2:mem:test_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     # username: root
-    # password: javatest
-    # driver-class-name: com.mysql.cj.jdbc.Driver
+    # password: root
+
+    # ------------------Connect to mysql db------------------------# 
+    url: jdbc:mysql://localhost:3306/spring
+    username: root
+    password: javatest
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+    # ------------------Connect to oracle db------------------------#
+      # url: jdbc:oracle:thin:@000.00.000.000:0000/TESTDB
+      # username: TESTUSERNANE
+      # password: TESTPASSWORD
+      # driver-class-name: oracle.jdbc.OracleDriver
+
   tomcat:
     max-wait: 20000
     max-active: 50
@@ -18,8 +28,15 @@ spring:
       ddl-auto: create-drop
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
-        # dialect: org.hibernate.dialect.MySQL8Dialect
+        # ------------------Connect to H2 db------------------------# 
+        # dialect: org.hibernate.dialect.H2Dialect
+
+        # ------------------Connect to mysql db------------------------# 
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+        # ------------------Connect to oracle db------------------------#
+        # dialect: org.hibernate.dialect.Oracle12cDialect
+
         format_sql: true
         id:
           new_generator_mappings: false
